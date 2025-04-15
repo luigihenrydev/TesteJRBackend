@@ -3,6 +3,7 @@ using apiToDo.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 
 namespace apiToDo.Controllers
 {
@@ -16,8 +17,9 @@ namespace apiToDo.Controllers
         {
             try
             {
-              
-                return StatusCode(200);
+                Tarefas Tarefas = new Tarefas(); // Cria uma instância da classe Tarefas.
+                List<TarefaDTO> lstTarefas = Tarefas.lstTarefas(); // Cria uma lista do tipo TarefaDTO e chamo o método lstTarefas() que traz a lista.
+                return StatusCode(200, lstTarefas); // Retorna StatusCode 200 e retorna a lista de tarefas.
             }
 
             catch (Exception ex)
