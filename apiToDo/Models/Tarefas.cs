@@ -36,7 +36,7 @@ namespace apiToDo.Models
             {
                 return _lstTarefas; // retorna a lstTarefas
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw ex;
             }
@@ -50,7 +50,7 @@ namespace apiToDo.Models
                 _lstTarefas.Add(Request); // adiciona a nova tarefa na lista
                 return true;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new Exception("Ocorreu um erro ao tentar adicionar  a tarefa", ex);
             }
@@ -100,5 +100,29 @@ namespace apiToDo.Models
                 throw new Exception("Ocorreu um erro ao tentar atualizar a tarefa", ex);
             }
         }
+
+
+        public TarefaDTO PegarTarefaPorID(int ID_TAREFA)
+        {
+            try
+            {
+
+                var tarefa = _lstTarefas.FirstOrDefault(x => x.ID_TAREFA == ID_TAREFA);
+                if (tarefa != null) // Se a Tarefa com o ID recebido no parametro exista (for diferente de nula)
+                {
+                    var indexDaTarefa = _lstTarefas.IndexOf(tarefa); // pega o indice na _lstTarefas da tarefa que foi recebida no parametro
+                    return _lstTarefas[indexDaTarefa]; // retorna o elemento da lista que tem o mesmo id
+                }
+                else // Caso a Tarefa não exista na lista
+                {
+                    throw new Exception($"Tarefa {ID_TAREFA} não encontrada"); // retorna uma exception com tarefa não encontrada
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar achar a tarefa", ex);
+            }
+        }
+
     }
 }
