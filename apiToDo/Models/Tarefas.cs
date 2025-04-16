@@ -67,10 +67,34 @@ namespace apiToDo.Models
                     throw new Exception($"Tarefa {ID_TAREFA} não encontrada"); // retorna uma exception com tarefa não encontrada
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
                 throw new Exception("Ocorreu um erro ao tentar excluir a tarefa", ex);
+            }
+        }
+
+        public void AtualizarTarefa(TarefaDTO tarefaAtualizada)
+        {
+            try
+            {
+                List<TarefaDTO> lstResponse = lstTarefas();
+                var tarefaNaLista = lstResponse.FirstOrDefault(x => x.ID_TAREFA == tarefaAtualizada.ID_TAREFA);
+
+                if (tarefaNaLista != null) // Se existir uma Tarefa com o ID igual ao ID da tarefa recebida no parametro (for diferente de nula)
+                {
+                    var indexDaTarefa = lstResponse.IndexOf(tarefaNaLista); // pega o indice na lstResponse da tarefa que foi recebida no parametro
+                    lstResponse[indexDaTarefa] = tarefaAtualizada; // pega o objeto que tenha o indice do que foi recebido e substitui com o novo
+                  
+                }
+                else // Caso a Tarefa não exista na lista
+                {
+                    throw new Exception($"Tarefa {tarefaAtualizada.ID_TAREFA} não encontrada"); // retorna uma exception com tarefa não encontrada
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ocorreu um erro ao tentar atualizar a tarefa", ex);
             }
         }
     }
