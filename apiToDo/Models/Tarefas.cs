@@ -56,6 +56,7 @@ namespace apiToDo.Models
             }
         }
         public bool DeletarTarefa(int ID_TAREFA)
+
         {
             try
             {
@@ -123,6 +124,5 @@ namespace apiToDo.Models
                 throw new Exception("Ocorreu um erro ao tentar achar a tarefa", ex);
             }
         }
-
     }
 }
